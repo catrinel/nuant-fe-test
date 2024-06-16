@@ -1,1 +1,0 @@
-// state manager for pokemon data

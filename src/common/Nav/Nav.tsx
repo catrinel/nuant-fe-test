@@ -16,26 +16,22 @@ const Nav: React.FC<INavProps> = ({ navItems }) => {
               </a>
             </div>
 
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-4">
-                {navItems.map((item) => (
-                  <a href={item.link} key={item.link}>
-                    {item.text}
-                  </a>
-                ))}
-              </div>
+            <div className="ml-10 flex items-baseline space-x-4">
+              {navItems.map((item) => (
+                <a href={item.link} key={item.link}>
+                  {item.text}
+                </a>
+              ))}
             </div>
           </div>
-          <div className="hidden md:block">
-            <div className="ml-4 flex items-center md:ml-6">
-              <a href="/user">
-                <Avatar
-                  src={Bulbasaur}
-                  name="Hi, Bulbasaur!"
-                  alt="Bulbasaur pokemon"
-                />
-              </a>
-            </div>
+          <div className="ml-4 flex items-center md:ml-6">
+            <a href="/user">
+              <Avatar
+                src={Bulbasaur}
+                name="Hi, Bulbasaur!"
+                alt="Bulbasaur pokemon"
+              />
+            </a>
           </div>
         </div>
       </div>

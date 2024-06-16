@@ -1,0 +1,3 @@
+.poke-list-container {
+  max-height: calc(99vh - 300px);
+}

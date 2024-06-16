@@ -1,5 +1,5 @@
 export enum AvatarSize {
-  small = "32x",
+  small = "48px",
   medium = "64px",
   large = "128px",
 }
@@ -9,4 +9,5 @@ export interface IAvatarProps {
   alt: string;
   name?: string;
   size?: AvatarSize;
+  withBorder?: boolean;
 }

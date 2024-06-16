@@ -4,6 +4,7 @@ export default function Avatar(props: IAvatarProps) {
   return (
     <div className="flex content-center py-1">
       <img
+        className={props.withBorder ? "border border-teal-700 rounded-full" : undefined}
         src={props.src}
         height={props.size || AvatarSize.small}
         width={props.size || AvatarSize.small}
