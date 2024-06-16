@@ -1,0 +1,4 @@
+.poke-container {
+  max-height: calc(99vh - 300px);
+  min-height: calc(99vh - 300px);
+}

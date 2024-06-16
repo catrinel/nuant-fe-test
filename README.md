@@ -1,45 +1,40 @@
 # Nuant FE Test
 
-This project uses vite react-ts template which provides a minimal setup to get React working in Vite with ESLint rules.
+This project is my solution for the home assignment received from Nuant.
 
-It's been configured with Tailwindcss in case you want to use it Pokenode to retrieve the data of Pokemons
+### Submitting
 
-- [Pokenode](https://pokenode-ts.vercel.app/) (hint for the pokenode usage, PokemonClient has very helpful functions like `listPokemons`, `listTypes`, `getPokemonById` and `getPokemonByName` and many options more!) 
-- [Tailwind](https://tailwindcss.com/)
-
-The purpose of the test is to implement an app that have the ability of :
-
-- Search for Pokemon by `name` and the posibility to filter the results by `type`
-  (User can search by name, user can filter pokemons by type, user can do both at the same time also)
-- Display the search results with enough detail to be able to identify to which Pokemon each result belongs.(Name and a image would do)
-- View more information about the Pokemon on a dedicated page by clicking a search result. (You can display Name, different sprites, weight, height and basic information, dealing with linked entities will be bonus point but arent really mandatory).
-- See the previous search results when navigating back to the search page from the pokemon details page.
-
-So basically something like:
-![Screenshot](screenshot.png)
+Running the app: 
+````npm run dev````
 
 
--Tool and Library Selection: You're encouraged to leverage any libraries, frameworks, or tools that you believe will streamline the development process and enhance the quality of the final product. Whether it's a front-end framework like React.js or a design tool like Figma, choose what aligns best with your skillset and the project requirements.
+Running the tests: first, make sure the app is running, then in another terminal run : ````npm run playwright````
+Alternatively, you can run ```` npx playwright test --ui ```` to see the tests run in the browser ui.
 
--Approach to Task: Treat this technical test as you would a real-world project. Break down the task into manageable components, define clear objectives, and follow best practices for code organization, documentation, and testing. Your approach should reflect your ability to deliver high-quality work within a given timeframe.
-
--Commit Log: Provide a detailed commit log that outlines your thought process, decisions, and implementation steps throughout the project. This allows reviewers to understand how you approached the task, the challenges you encountered, and how you resolved them. It also demonstrates your ability to work collaboratively and communicate effectively within a team setting.
-
--Long-Term Perspective: Consider this task as part of a larger project with potential for future iterations and enhancements. Your implementation should be flexible, scalable, and well-structured to accommodate additional functionalities or changes down the line. Think about how your codebase can be easily maintained and extended by other developers in the future.
-Overall, approach the task with professionalism, attention to detail, and a focus on delivering a high-quality solution that meets the project requirements and demonstrates your technical skills and expertise.
-
-
-
-
- ### Submitting
-
-  To submit your finished project, share with us a link to a GitHub repository containing its code. Along with instructions on how to run the app, include answers to the following:
+### Submitting
 
 - What part of building the project was the most difficult? Why?
+ > I didn't find the tasks difficult, what I had a difficult time with was finishing everything as fast as possible, since I was bulding the components from scratch, while using some new libraries I haven't played with before. 
+ 
+ Of course the most complex 'business logic' was in aggregating the data for the search and filter results, not so much in the sense that the task was difficult, but as in providing a clean enough solution. I'm sure there is room for improvement in that area of the code :D. And the debounce is still not working :D 
+
+
 - How long did it take to have this test completed ? Which part of the test took you longer? Could you specify roughly the amount of time it took you to do the following:
-    - Set up environment    
-    - Search feature
-    - Filter feature
-    - Result display
-    - Other (please specify)
+
+    > It took me around 9 hrs ! Took me the most time to get familiar with tailwind, the pokemon API, and building most of the UI components from scrath (I wanted to use tailwind because I know that's what you use on the project, to get a feel of it, so that's why I did not choose compoents from a component library I'm more familiar with - such as Material UI or Fluen UI, etc. - I think I 'lost' quite a bit of time this way, so maybe it wasn't the best choice to learn new stuff now, but I enjoyed myself)
+
+    - Set up environment > 15 minutes maybe less 
+
+    - Result display > ~ two hours and a half (I did a paginated get all for when no filters are applied and that took a bit of time :D, as well as most of the components, context, service at this point)
+    - Filter feature > around one hour
+    - Search feature > around 30 minutes (this was the last bit I developed so by this time I had most of the flows in place and it was easier to integrate)
+  
+    - Show item details > around 40 minutes ? (had all my data from the list calls :D, so this part was mostly about having a nice enough layout, arranging the images, and so on)
+
+    - Unit tests > around 40 minutes, the intention was to do TDD, but I gave it up as I time was running low :D
+
+    - Other (please specify) > I think I 'lost' some time worrying about routing, building a very basic user profile, wanting to have a nice project structure in place, maybe I did some 'extra', unrequired things ? 
+    Also reading the documnetation for tailwind, the API, headlessui, I did not have the chance to work directly with these libraries before.
+    All in all, I spent around 2 hours, I think, working on the project base structure and reading the docs.
+    I also tried to make the layout responsive, so that took some time as well.
 
