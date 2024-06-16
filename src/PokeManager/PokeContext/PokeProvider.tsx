@@ -18,7 +18,7 @@ function PokeProvider({ children }: IPokeProviderProps) {
 
   useEffect(() => {
     loadPokemons();
-  }, []);
+  }, [state.currentPage]);
 
   const loadData = async () => {
     try {

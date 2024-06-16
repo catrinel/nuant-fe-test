@@ -3,6 +3,7 @@ import { IPaginationProps } from "./Pagination.interface";
 
 export default function Pagination(props: IPaginationProps) {
   const currentItemCount = props.currentPage * props.itemsPerPage + 1;
+  const totalPages = Math.ceil(props.totalItems / props.itemsPerPage);
 
   return (
     <div className="flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6">
@@ -38,6 +39,7 @@ export default function Pagination(props: IPaginationProps) {
           >
             <a
               href="#"
+              onClick={() => props.setCurrentPage(props.currentPage - 1)}
               className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Previous</span>
@@ -46,46 +48,89 @@ export default function Pagination(props: IPaginationProps) {
 
             <a
               href="#"
-              aria-current="page"
-              className="relative z-10 inline-flex items-center bg-teal-700 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={() => props.setCurrentPage(0)}
+              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
+                props.currentPage === 0
+                  ? "bg-teal-700 text-white"
+                  : "text-gray-900"
+              } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
             >
               1
             </a>
             <a
               href="#"
-              className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+              onClick={() => props.setCurrentPage(1)}
+              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
+                props.currentPage === 1
+                  ? "bg-teal-700 text-white"
+                  : "text-gray-900"
+              } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
             >
               2
             </a>
             <a
               href="#"
-              className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
+              onClick={() => props.setCurrentPage(2)}
+              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
+                props.currentPage === 2
+                  ? "bg-teal-700 text-white"
+                  : "text-gray-900"
+              } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
             >
               3
             </a>
+
+            {props.currentPage > 4 && (
+              <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
+                ...
+              </span>
+            )}
+            {props.currentPage > 3 && (
+              <a
+                href="#"
+                onClick={() => props.setCurrentPage(props.currentPage - 1)}
+                className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
+              >
+                {props.currentPage}
+              </a>
+            )}
+
+            {props.currentPage > 2 && props.currentPage < totalPages - 1 && (
+              <a
+                href="#"
+                className="relative hidden items-center px-4 py-2 text-sm font-semibold bg-teal-700 text-white ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
+              >
+                {props.currentPage + 1}
+              </a>
+            )}
+
+            {props.currentPage > 1 && props.currentPage < totalPages - 2 && (
+              <a
+                onClick={() => props.setCurrentPage(props.currentPage + 1)}
+                href="#"
+                className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
+              >
+                {props.currentPage + 2}
+              </a>
+            )}
+
             <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
               ...
             </span>
             <a
               href="#"
-              className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
+              onClick={() => props.setCurrentPage(totalPages - 1)}
+              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
+                props.currentPage === totalPages - 1
+                  ? "bg-teal-700 text-white"
+                  : "text-gray-900"
+              } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
             >
-              8
+              {totalPages}
             </a>
             <a
               href="#"
-              className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              9
-            </a>
-            <a
-              href="#"
-              className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              {props.totalItems / props.itemsPerPage}
-            </a>
-            <a
-              href="#"
+              onClick={() => props.setCurrentPage(props.currentPage + 1)}
               className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             >
               <span className="sr-only">Next</span>
