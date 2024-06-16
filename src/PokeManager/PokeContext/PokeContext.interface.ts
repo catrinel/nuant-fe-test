@@ -1,7 +1,4 @@
-import {
-  IPokemon,
-  IPokemonType,
-} from "../../Services/PokeService/PokeService.interface";
+import { IPokemon } from "../../Services/PokeService/PokeService.interface";
 
 export interface IPokeState {
   pokemons: IPokemon[];
@@ -12,8 +9,8 @@ export interface IPokeState {
   currentPage: number;
   itemsPerPage: number;
 
-  types: IPokemonType[];
-  selectedType: IPokemonType | undefined;
+  types: string[];
+  selectedType: string | undefined;
 
   searchKey: string | undefined;
   totalItems: number;
@@ -50,7 +47,7 @@ export type PokeAction =
   | {
       type: PokeActionsEnum.SET_TYPES;
       payload: {
-        types: IPokemonType[];
+        types: string[];
       };
     }
   | {
@@ -62,7 +59,7 @@ export type PokeAction =
   | {
       type: PokeActionsEnum.SET_SELECTED_TYPE;
       payload: {
-        selectedType: IPokemonType | undefined;
+        selectedType: string | undefined;
       };
     }
   | {
@@ -106,7 +103,7 @@ export type IPokeProviderValue = {
   state: IPokeState;
   setSearchKey: (searchKey: string | undefined) => void;
   // TODO : select multiple types?
-  setSelectedType: (selectedType: IPokemonType | undefined) => void;
+  setSelectedType: (selectedType: string | undefined) => void;
   setCurrentPage: (currentPage: number) => void;
   setItemsPerPage: (itemsPerPage: number) => void;
   setSelectedPokemon: (selectedPokemon: IPokemon | undefined) => void;

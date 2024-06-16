@@ -87,6 +87,7 @@ const PokeItemDetail: React.FC = () => {
                       src={image[1]}
                       alt={image[0]}
                       size={AvatarSize.large}
+                      key={image[0]}
                     />
                   ))
                   .reverse()}

@@ -3,12 +3,15 @@ import { usePokeContext } from "../PokeContext/PokeContext";
 import PokeItem from "./PokeItem";
 
 import "./PokeList.css";
+import PokeListFilters from "./PokeListFilters";
 
 const PokeList: React.FC = () => {
   const { state, setCurrentPage } = usePokeContext();
 
   return (
     <>
+      <PokeListFilters />
+
       <div className="poke-container overflow-y-auto">
         <ul role="list" className="divide-y divide-gray-100 ">
           {state.pokemons.map((pokemon) => (

@@ -2,7 +2,12 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 import { IPaginationProps } from "./Pagination.interface";
 
 export default function Pagination(props: IPaginationProps) {
-  const currentItemCount = props.currentPage * props.itemsPerPage + 1;
+  const currentItemCount =
+    props.totalItems === 0 ? 0 : props.currentPage * props.itemsPerPage + 1;
+  const lastItemsPerPage =
+    props.totalItems <= 1
+      ? currentItemCount
+      : currentItemCount + props.itemsPerPage - 1;
   const totalPages = Math.ceil(props.totalItems / props.itemsPerPage);
 
   return (
@@ -26,10 +31,8 @@ export default function Pagination(props: IPaginationProps) {
         <div>
           <p className="text-sm text-gray-700">
             Showing <span className="font-medium">{currentItemCount}</span> to{" "}
-            <span className="font-medium">
-              {currentItemCount + props.itemsPerPage - 1}
-            </span>{" "}
-            of <span className="font-medium">{props.totalItems}</span> results
+            <span className="font-medium">{lastItemsPerPage}</span> of{" "}
+            <span className="font-medium">{props.totalItems}</span> results
           </p>
         </div>
         <div>
@@ -37,14 +40,16 @@ export default function Pagination(props: IPaginationProps) {
             className="isolate inline-flex -space-x-px rounded-md shadow-sm"
             aria-label="Pagination"
           >
-            <a
-              href="#"
-              onClick={() => props.setCurrentPage(props.currentPage - 1)}
-              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              <span className="sr-only">Previous</span>
-              <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
+            {totalPages > 1 && (
+              <a
+                href="#"
+                onClick={() => props.setCurrentPage(props.currentPage - 1)}
+                className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+              >
+                <span className="sr-only">Previous</span>
+                <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+              </a>
+            )}
 
             <a
               href="#"
@@ -57,28 +62,33 @@ export default function Pagination(props: IPaginationProps) {
             >
               1
             </a>
-            <a
-              href="#"
-              onClick={() => props.setCurrentPage(1)}
-              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
-                props.currentPage === 1
-                  ? "bg-teal-700 text-white"
-                  : "text-gray-900"
-              } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
-            >
-              2
-            </a>
-            <a
-              href="#"
-              onClick={() => props.setCurrentPage(2)}
-              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
-                props.currentPage === 2
-                  ? "bg-teal-700 text-white"
-                  : "text-gray-900"
-              } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
-            >
-              3
-            </a>
+
+            {totalPages > 1 && (
+              <>
+                <a
+                  href="#"
+                  onClick={() => props.setCurrentPage(1)}
+                  className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
+                    props.currentPage === 1
+                      ? "bg-teal-700 text-white"
+                      : "text-gray-900"
+                  } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
+                >
+                  2
+                </a>
+                <a
+                  href="#"
+                  onClick={() => props.setCurrentPage(2)}
+                  className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
+                    props.currentPage === 2
+                      ? "bg-teal-700 text-white"
+                      : "text-gray-900"
+                  } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
+                >
+                  3
+                </a>
+              </>
+            )}
 
             {props.currentPage > 4 && (
               <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
@@ -114,28 +124,33 @@ export default function Pagination(props: IPaginationProps) {
               </a>
             )}
 
-            <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
-              ...
-            </span>
-            <a
-              href="#"
-              onClick={() => props.setCurrentPage(totalPages - 1)}
-              className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
-                props.currentPage === totalPages - 1
-                  ? "bg-teal-700 text-white"
-                  : "text-gray-900"
-              } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
-            >
-              {totalPages}
-            </a>
-            <a
-              href="#"
-              onClick={() => props.setCurrentPage(props.currentPage + 1)}
-              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            >
-              <span className="sr-only">Next</span>
-              <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-            </a>
+            {totalPages > 1 && (
+              <>
+                <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
+                  ...
+                </span>
+                <a
+                  href="#"
+                  onClick={() => props.setCurrentPage(totalPages - 1)}
+                  className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
+                    props.currentPage === totalPages - 1
+                      ? "bg-teal-700 text-white"
+                      : "text-gray-900"
+                  } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
+                >
+                  {totalPages}
+                </a>
+
+                <a
+                  href="#"
+                  onClick={() => props.setCurrentPage(props.currentPage + 1)}
+                  className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                >
+                  <span className="sr-only">Next</span>
+                  <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                </a>
+              </>
+            )}
           </nav>
         </div>
       </div>

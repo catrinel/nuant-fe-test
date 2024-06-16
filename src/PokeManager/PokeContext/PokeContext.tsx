@@ -2,8 +2,8 @@ import React from "react";
 import { IPokeProviderValue, IPokeState } from "./PokeContext.interface";
 
 const EMPTY_FN = () => {};
-const DEFAULT_PAGE = 0;
-const DEFAULT_ITEMS_PER_PAGE = 10;
+export const DEFAULT_PAGE = 0;
+export const DEFAULT_ITEMS_PER_PAGE = 10;
 
 export const initialPokeState: IPokeState = {
   pokemons: [],

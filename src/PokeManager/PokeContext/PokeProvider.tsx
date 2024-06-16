@@ -5,22 +5,29 @@ import {
   IPokeProviderValue,
   PokeActionsEnum,
 } from "./PokeContext.interface";
-import { PokeContext, initialPokeState } from "./PokeContext";
-import toast from "react-hot-toast";
 import {
-  IPokemon,
-  IPokemonType,
-} from "../../Services/PokeService/PokeService.interface";
+  DEFAULT_ITEMS_PER_PAGE,
+  DEFAULT_PAGE,
+  PokeContext,
+  initialPokeState,
+} from "./PokeContext";
+import toast from "react-hot-toast";
+import { IPokemon } from "../../Services/PokeService/PokeService.interface";
 import { PokeService } from "../../Services/PokeService/PokeService";
+import { debounce } from "lodash";
 
 function PokeProvider({ children }: IPokeProviderProps) {
   const [state, dispatch] = React.useReducer(PokeReducer, initialPokeState);
 
   useEffect(() => {
-    loadPokemons();
-  }, [state.currentPage]);
+    loadTypes();
+  }, []);
 
-  const loadData = async () => {
+  useEffect(() => {
+    loadPokemons(state.searchKey, state.selectedType);
+  }, [state.currentPage, state.selectedType, state.searchKey]);
+
+  const loadPokemonData = async () => {
     try {
       const { pokemons, count } = await PokeService.getPokemons(
         state.currentPage,
@@ -29,14 +36,58 @@ function PokeProvider({ children }: IPokeProviderProps) {
 
       setPokemons(pokemons);
       setTotalItems(count);
+      setItemsPerPage(DEFAULT_ITEMS_PER_PAGE);
     } catch (error) {
       toast.error("Error fetching pokemons!");
     }
   };
 
-  const loadPokemons = () => {
+  const filterPokemons = async () => {
+    try {
+      const { pokemons, count } = await PokeService.getPokemonsByNameAndType(
+        state.searchKey,
+        state.selectedType
+      );
+
+      setPokemons(pokemons);
+      setTotalItems(count);
+      setItemsPerPage(count);
+    } catch (error) {
+      toast.error("Error fetching pokemons!");
+    }
+  };
+
+  const loadTypesData = async () => {
+    try {
+      const { types, count } = await PokeService.listTypes();
+
+      setTypes(types);
+      setTotalItems(count);
+    } catch (error) {
+      toast.error("Error fetching pokemons!");
+    }
+  };
+
+  const debouncedLoadPokemonData = debounce(loadPokemonData, 1000);
+  const debouncedFilterPokemons = debounce(filterPokemons, 1000);
+
+  const loadPokemons = (
+    searchKey: string | undefined,
+    selectedType: string | undefined
+  ) => {
     setIsLoading(true);
-    loadData();
+    setCurrentPage(DEFAULT_PAGE);
+
+    if (!searchKey && !selectedType) {
+      debouncedLoadPokemonData();
+    } else {
+      debouncedFilterPokemons();
+    }
+  };
+
+  const loadTypes = () => {
+    setIsLoading(true);
+    loadTypesData();
   };
 
   const setIsLoading = useCallback(
@@ -60,7 +111,7 @@ function PokeProvider({ children }: IPokeProviderProps) {
   );
 
   const setTypes = useCallback(
-    (types: IPokemonType[]) => {
+    (types: string[]) => {
       dispatch({
         type: PokeActionsEnum.SET_TYPES,
         payload: { types },
@@ -70,7 +121,7 @@ function PokeProvider({ children }: IPokeProviderProps) {
   );
 
   const setSelectedType = useCallback(
-    (selectedType: IPokemonType | undefined) => {
+    (selectedType: string | undefined) => {
       dispatch({
         type: PokeActionsEnum.SET_SELECTED_TYPE,
         payload: { selectedType },
