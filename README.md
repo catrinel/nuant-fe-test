@@ -17,7 +17,7 @@ Alternatively, you can run ```` npx playwright test --ui ```` to see the tests r
 - What part of building the project was the most difficult? Why?
  > I didn't find the tasks difficult, what I had a difficult time with was finishing everything as fast as possible, since I was bulding the components from scratch, while using some new libraries I haven't played with before. 
  
- Of course the most complex 'business logic' was in aggregating the data for the search and filter results, not so much in the sense that the task was difficult, but as in providing a clean enough solution. I'm sure there is room for improvement in that area of the code :D. And the debounce is still not working :D 
+ > Of course the most complex 'business logic' was in aggregating the data for the search and filter results, not so much in the sense that the task was difficult, but as in providing a clean enough solution. I'm sure there is room for improvement in that area of the code :D. And the debounce is still not working :D 
 
 
 - How long did it take to have this test completed ? Which part of the test took you longer? Could you specify roughly the amount of time it took you to do the following:
