@@ -119,12 +119,34 @@ function PokeProvider({ children }: IPokeProviderProps) {
     [dispatch]
   );
 
+  const setSelectedPokemon = useCallback(
+    (selectedPokemon: IPokemon | undefined) => {
+      dispatch({
+        type: PokeActionsEnum.SET_SELECTED_POKEMON,
+        payload: { selectedPokemon },
+      });
+    },
+    [dispatch]
+  );
+
+  const setShowDetails = useCallback(
+    (showDetails: boolean) => {
+      dispatch({
+        type: PokeActionsEnum.SET_SHOW_DETAILS,
+        payload: { showDetails },
+      });
+    },
+    [dispatch]
+  );
+
   const value: IPokeProviderValue = {
     state,
     setItemsPerPage,
     setSelectedType,
     setCurrentPage,
     setSearchKey,
+    setSelectedPokemon,
+    setShowDetails,
   };
 
   return <PokeContext.Provider value={value}>{children}</PokeContext.Provider>;

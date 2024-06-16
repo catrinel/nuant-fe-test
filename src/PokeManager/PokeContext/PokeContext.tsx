@@ -14,6 +14,8 @@ export const initialPokeState: IPokeState = {
   selectedType: undefined,
   isLoading: false,
   totalItems: 0,
+  selectedPokemon: undefined,
+  showDetails: false,
 };
 
 export const initialPokeProviderValue: IPokeProviderValue = {
@@ -22,6 +24,8 @@ export const initialPokeProviderValue: IPokeProviderValue = {
   setItemsPerPage: EMPTY_FN,
   setSearchKey: EMPTY_FN,
   setSelectedType: EMPTY_FN,
+  setSelectedPokemon: EMPTY_FN,
+  setShowDetails: EMPTY_FN,
 };
 
 export const PokeContext = React.createContext<IPokeProviderValue>(

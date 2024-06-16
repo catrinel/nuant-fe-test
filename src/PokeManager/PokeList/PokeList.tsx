@@ -9,7 +9,7 @@ const PokeList: React.FC = () => {
 
   return (
     <>
-      <div className="poke-list-container overflow-y-auto">
+      <div className="poke-container overflow-y-auto">
         <ul role="list" className="divide-y divide-gray-100 ">
           {state.pokemons.map((pokemon) => (
             <li

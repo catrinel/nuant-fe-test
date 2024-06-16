@@ -6,6 +6,9 @@ import {
 export interface IPokeState {
   pokemons: IPokemon[];
 
+  selectedPokemon: IPokemon | undefined;
+  showDetails: boolean;
+
   currentPage: number;
   itemsPerPage: number;
 
@@ -19,14 +22,16 @@ export interface IPokeState {
 }
 
 export enum PokeActionsEnum {
-  SET_POKEMONS = "SET_POKEMONS",
-  SET_TYPES = "SET_TYPES",
-  SET_SEARCH_KEY = "SET_SEARCH_KEY",
-  SET_SELECTED_TYPE = "SET_SELECTED_TYPE",
-  SET_IS_LOADING = "SET_IS_LOADING",
-  SET_CURRENT_PAGE = "SET_CURRENT_PAGE",
-  SET_ITEMS_PER_PAGE = "SET_ITEMS_PER_PAGE",
-  SET_TOTAL_ITEMS = "SET_TOTAL_ITEMS",
+  SET_POKEMONS,
+  SET_SELECTED_POKEMON,
+  SET_TYPES,
+  SET_SEARCH_KEY,
+  SET_SELECTED_TYPE,
+  SET_IS_LOADING,
+  SET_CURRENT_PAGE,
+  SET_ITEMS_PER_PAGE,
+  SET_TOTAL_ITEMS,
+  SET_SHOW_DETAILS,
 }
 
 export type PokeAction =
@@ -34,6 +39,12 @@ export type PokeAction =
       type: PokeActionsEnum.SET_POKEMONS;
       payload: {
         pokemons: IPokemon[];
+      };
+    }
+  | {
+      type: PokeActionsEnum.SET_SELECTED_POKEMON;
+      payload: {
+        selectedPokemon: IPokemon | undefined;
       };
     }
   | {
@@ -77,6 +88,12 @@ export type PokeAction =
       payload: {
         totalItems: number;
       };
+    }
+  | {
+      type: PokeActionsEnum.SET_SHOW_DETAILS;
+      payload: {
+        showDetails: boolean;
+      };
     };
 
 export type PokeDispatch = ((action: PokeAction) => void) | undefined;
@@ -92,4 +109,6 @@ export type IPokeProviderValue = {
   setSelectedType: (selectedType: IPokemonType | undefined) => void;
   setCurrentPage: (currentPage: number) => void;
   setItemsPerPage: (itemsPerPage: number) => void;
+  setSelectedPokemon: (selectedPokemon: IPokemon | undefined) => void;
+  setShowDetails: (showDetails: boolean) => void;
 };

@@ -54,7 +54,18 @@ export function PokeReducer(state: IPokeState, action: PokeAction): IPokeState {
         isLoading: action.payload.isLoading,
       };
     }
-
+    case PokeActionsEnum.SET_SELECTED_POKEMON: {
+      return {
+        ...state,
+        selectedPokemon: structuredClone(action.payload.selectedPokemon),
+      };
+    }
+    case PokeActionsEnum.SET_SHOW_DETAILS: {
+      return {
+        ...state,
+        showDetails: action.payload.showDetails,
+      };
+    }
     default: {
       throw new Error(`Unhandled action type: ${(action as PokeAction).type}`);
     }

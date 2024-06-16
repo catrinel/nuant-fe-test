@@ -12,7 +12,6 @@ const listPokemons = async (
   return await api
     .listPokemons(page * itemsPerPage, itemsPerPage)
     .then((data) => {
-      console.log(data);
       return {
         pokemonNames: data?.results?.map((item) => item.name) || [],
         count: data.count,
@@ -43,7 +42,6 @@ const getPokemons = async (
     const pokemonDTOs = data.map((dataItem) =>
       dataItem.status === "fulfilled" ? dataItem.value : undefined
     );
-    debugger;
 
     const pokemons = mapPokemons(
       pokemonDTOs.filter((pokeDTO) => pokeDTO !== undefined) as Pokemon[]
