@@ -51,7 +51,6 @@ const getPokemonsByName = async (
   return await api
     .getPokemonByName(nameKeyword.toLowerCase())
     .then((data) => {
-      console.log("by name", data);
       return {
         pokemons: [data.name],
         count: 1,

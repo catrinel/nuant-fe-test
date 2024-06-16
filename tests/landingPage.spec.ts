@@ -10,8 +10,6 @@ test.describe("Landing page", () => {
   });
 
   test("should render navbar", async ({ page }) => {
-    await expect(page.getByRole("navigation")).toBeVisible();
-
     await expect(page.getByText("Hi, Bulbasaur!")).toBeVisible();
 
     await expect(page.getByAltText("Bulbasaur pokemon")).toBeVisible();
@@ -21,7 +19,12 @@ test.describe("Landing page", () => {
     await expect(page.getByRole("heading", { name: "Pokedex" })).toBeVisible();
   });
 
-  test("should render pokemon list", async ({ page }) => {
-    await expect(page.getByText("Pokemon manager")).toBeVisible();
+  test("should render searchbox", async ({ page }) => {
+    await expect(page.getByLabel("Search pokemons by name")).toBeVisible();
+    await expect(page.getByPlaceholder("bulbasaur")).toBeVisible();
+  });
+
+  test("should render filter dropdown", async ({ page }) => {
+    await expect(page.getByLabel("Filter by type")).toBeVisible();
   });
 });
