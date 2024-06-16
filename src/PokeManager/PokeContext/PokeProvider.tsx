@@ -52,6 +52,7 @@ function PokeProvider({ children }: IPokeProviderProps) {
       setPokemons(pokemons);
       setTotalItems(count);
       setItemsPerPage(count);
+      setCurrentPage(DEFAULT_PAGE);
     } catch (error) {
       toast.error("Error fetching pokemons!");
     }
@@ -76,7 +77,6 @@ function PokeProvider({ children }: IPokeProviderProps) {
     selectedType: string | undefined
   ) => {
     setIsLoading(true);
-    setCurrentPage(DEFAULT_PAGE);
 
     if (!searchKey && !selectedType) {
       debouncedLoadPokemonData();
