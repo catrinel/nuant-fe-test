@@ -1,0 +1,1 @@
+// dtos / iterfaces for poke data (requests / responses)
