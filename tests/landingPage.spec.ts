@@ -20,4 +20,8 @@ test.describe("Landing page", () => {
   test("should have heading", async ({ page }) => {
     await expect(page.getByRole("heading", { name: "Pokedex" })).toBeVisible();
   });
+
+  test("should render pokemon list", async ({ page }) => {
+    await expect(page.getByText("Pokemon manager")).toBeVisible();
+  });
 });

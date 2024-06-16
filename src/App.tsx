@@ -1,27 +1,13 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import "./App.css";
-import LandingPage from "./routes/LandingPage/LandingPage";
-import Avatar from "./common/Avatar/Avatar";
+import { RouterProvider } from "react-router-dom";
 import Nav from "./common/Nav/Nav";
 import { navItems } from "./routes/navItems";
-import Bulbasaur from "./assets/bulbasaur.png";
+import { router } from "./routes/Router";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <LandingPage />,
-  },
-  {
-    path: "/user",
-    element: (
-      <Avatar src={Bulbasaur} name="Hi, Bulbasaur!" alt="Bulbasaur pokemon" />
-    ),
-  },
-]);
+import "./App.css";
 
 function App() {
   return (
-    <div className="min-h-full">
+    <div className="h-full min-h-full">
       <Nav navItems={navItems} />
       <RouterProvider router={router} />
     </div>
